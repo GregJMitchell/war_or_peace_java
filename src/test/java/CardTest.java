@@ -8,7 +8,7 @@ class CardTest {
         Card card = new Card("Hearts", "Queen", 12);
 
         assertEquals(12, card.rank);
-        assertTrue(card.suit == "Hearts");
-        assertTrue(card.value == "Queen");
+        assertSame("Hearts", card.suit);
+        assertSame("Queen", card.value);
     }
 }

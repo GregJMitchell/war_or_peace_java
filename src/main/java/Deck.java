@@ -13,10 +13,10 @@ public class Deck {
     }
 
 public Card[] highRankingCards() {
-         ArrayList<Card> highCards = new ArrayList<Card>();
-    for (int i = 0; i < cards.length; i++) {
-        if (cards[i].rank >= 11){
-            highCards.add((cards[i]));
+         ArrayList<Card> highCards = new ArrayList<>();
+    for (Card card : cards) {
+        if (card.rank >= 11) {
+            highCards.add(card);
         }
     }
 
@@ -25,7 +25,7 @@ public Card[] highRankingCards() {
 }
 
     public float percentHighRanking() {
-        return highRankingCards().length / cards.length;
+        return (float)highRankingCards().length / cards.length;
     }
 
     public void removeCard() {

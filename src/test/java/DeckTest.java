@@ -1,13 +1,20 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class DeckTest {
+    private Card card1;
+    private Card card2;
+    private Card card3;
+    @BeforeEach
+    void setup() {
+        card1 = new Card("Clubs", "Queen", 12);
+        card2 = new Card("Clubs", "King", 13);
+        card3 = new Card("Clubs", "Two", 2);
+    }
     @Test
     void rankOfCardAt() {
-        Card card1 = new Card("Clubs", "Queen", 12);
-        Card card2 = new Card("Clubs", "King", 13);
-
         Card[] cards = {card1, card2};
 
         Deck deck = new Deck(cards);
@@ -18,10 +25,6 @@ class DeckTest {
 
     @Test
     void highRankingCards() {
-        Card card1 = new Card("Clubs", "Queen", 12);
-        Card card2 = new Card("Clubs", "King", 13);
-        Card card3 = new Card("Clubs", "Two", 2);
-
         Card[] cards = {card1, card2, card3};
 
         Deck deck = new Deck(cards);
@@ -34,23 +37,17 @@ class DeckTest {
 
     @Test
     void percentHighRanking() {
-        Card card1 = new Card("Clubs", "Queen", 12);
-        Card card2 = new Card("Clubs", "King", 13);
-        Card card3 = new Card("Clubs", "Two", 2);
         Card[] cards = {card1, card2, card3};
 
         Deck deck = new Deck(cards);
 
-        float expected = 2 / 3;
+        float expected = 2.0f / 3.0f;
 
         assertEquals(expected, deck.percentHighRanking());
     }
 
     @Test
     void removeCard() {
-        Card card1 = new Card("Clubs", "Queen", 12);
-        Card card2 = new Card("Clubs", "King", 13);
-        Card card3 = new Card("Clubs", "Two", 2);
         Card[] cards = {card1, card2, card3};
 
         Deck deck = new Deck(cards);
@@ -64,9 +61,6 @@ class DeckTest {
 
     @Test
     void addCard() {
-        Card card1 = new Card("Clubs", "Queen", 12);
-        Card card2 = new Card("Clubs", "King", 13);
-        Card card3 = new Card("Clubs", "Two", 2);
         Card[] cards = {card1, card2};
 
         Deck deck = new Deck(cards);

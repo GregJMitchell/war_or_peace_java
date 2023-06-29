@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Turn {
     Player player1;
     Player player2;
-    ArrayList<Card> spoilsOfWar;
+    ArrayList<Card> spoilsOfWar = new ArrayList<>();
 
     public Turn(Player newPlayer1, Player newPlayer2) {
         player1 = newPlayer1;
@@ -27,8 +27,10 @@ public class Turn {
         switch (type()) {
             case "basic":
                 winningPlayer = findWinnerBasic();
+                break;
             case "war":
                 winningPlayer = findWinnerWar();
+                break;
             case "mutually_assured_destruction":
                 break;
         }
@@ -41,6 +43,7 @@ public class Turn {
             case "basic":
                 spoilsOfWar.add(player1.deck.removeCard());
                 spoilsOfWar.add(player2.deck.removeCard());
+                break;
             default:
                 int index = 1;
 

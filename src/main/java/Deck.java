@@ -28,8 +28,10 @@ public Card[] highRankingCards() {
         return (float)highRankingCards().length / cards.length;
     }
 
-    public void removeCard() {
+    public Card removeCard() {
+        Card removedCard = cards[cards.length - 1];
         cards = Arrays.copyOf(cards, cards.length - 1);
+        return removedCard;
     }
 
     public void addCard(Card card) {

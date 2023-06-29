@@ -56,15 +56,15 @@ public class Turn {
         }
     }
 
-    public void awardSpoils() {
-        if(winner() == null){
+    public void awardSpoils(Player winner) {
+        if(winner == null){
             spoilsOfWar = new ArrayList();
 
             return;
         }
 
         for (Card card: spoilsOfWar) {
-            winner().deck.addCard(card);
+            winner.deck.addCard(card);
         }
     }
 

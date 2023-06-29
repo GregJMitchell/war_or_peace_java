@@ -1,6 +1,9 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TurnTest {
@@ -99,5 +102,77 @@ class TurnTest {
         assertArrayEquals(expectedPlayer1, player1.deck.cards);
         assertArrayEquals(expectedPlayer2, player2.deck.cards);
         assertArrayEquals(expectedSpoils, turn.spoilsOfWar.toArray());
+    }
+
+    @Test
+    void winnerBasic() {
+        Turn turn = new Turn(player1, player2);
+
+        assertEquals(turn.winner(), player1);
+    }
+
+    @Test
+    void winnerWar() {
+        Card[] cards = {card1, card4, card6};
+        deck2 = new Deck(cards);
+        player2 = new Player("Chris", deck2);
+
+        Turn turn = new Turn(player1, player2);
+
+        assertEquals(turn.winner(), player2);
+    }
+
+    @Test
+    void winnerMutuallyAssuredDestruction() {
+        Card[] cards = {card1, card4, card3};
+        deck2 = new Deck(cards);
+        player2 = new Player("Chris", deck2);
+
+        Turn turn = new Turn(player1, player2);
+
+        assertNull(turn.winner());
+    }
+
+    @Test
+    void awardSpoilsMutuallyAssuredDestruction() {
+        Card[] cards = {card1, card4, card3};
+        deck2 = new Deck(cards);
+        player2 = new Player("Chris", deck2);
+
+        Turn turn = new Turn(player1, player2);
+
+        turn.awardSpoils(null);
+
+        ArrayList<Card> expected = new ArrayList<>();
+
+        assertArrayEquals(expected.toArray(), turn.spoilsOfWar.toArray());
+    }
+
+    @Test
+    void awardSpoilsWar() {
+        Card[] cards = {card1, card4, card6};
+        deck2 = new Deck(cards);
+        player2 = new Player("Chris", deck2);
+
+        Turn turn = new Turn(player1, player2);
+        turn.pileCards();
+
+        turn.awardSpoils(player2);
+
+        Card[] expectedSpoils = {card3, card6, card2, card4, card1, card1};
+
+        assertArrayEquals(expectedSpoils, player2.deck.cards);
+    }
+
+    @Test
+    void awardSpoilsBasic() {
+        Turn turn = new Turn(player1, player2);
+        turn.pileCards();
+
+        turn.awardSpoils(player1);
+
+        Card[] expectedSpoils = {card1, card2, card3, card6};
+
+        assertArrayEquals(expectedSpoils, player1.deck.cards);
     }
 }

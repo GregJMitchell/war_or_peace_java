@@ -66,4 +66,38 @@ class TurnTest {
 
         assertEquals(turn.type(), "mutually_assured_destruction");
     }
+
+    @Test
+    void pileCardsBasic() {
+        Turn turn = new Turn(player1, player2);
+
+        Card[] expectedPlayer1 = {card1, card2};
+        Card[] expectedPlayer2 = {card4, card5};
+        Card[] expectedSpoils = {card3, card6};
+
+        turn.pileCards();
+
+        assertArrayEquals(expectedPlayer1, player1.deck.cards);
+        assertArrayEquals(expectedPlayer2, player2.deck.cards);
+        assertArrayEquals(expectedSpoils, turn.spoilsOfWar.toArray());
+    }
+
+    @Test
+    void pileCardsDefault() {
+        Card[] cards = {card1, card4, card6};
+        deck2 = new Deck(cards);
+        player2 = new Player("Chris", deck2);
+
+        Turn turn = new Turn(player1, player2);
+
+        Card[] expectedPlayer1 = {};
+        Card[] expectedPlayer2 = {};
+        Card[] expectedSpoils = {card3, card6, card2, card4, card1, card1};
+
+        turn.pileCards();
+
+        assertArrayEquals(expectedPlayer1, player1.deck.cards);
+        assertArrayEquals(expectedPlayer2, player2.deck.cards);
+        assertArrayEquals(expectedSpoils, turn.spoilsOfWar.toArray());
+    }
 }

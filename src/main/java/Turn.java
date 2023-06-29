@@ -1,4 +1,3 @@
-import java.sql.Array;
 import java.util.ArrayList;
 
 public class Turn {
@@ -39,26 +38,23 @@ public class Turn {
     }
 
     public void pileCards() {
-        switch (type()) {
-            case "basic":
+        if (type().equals("basic")) {
+            spoilsOfWar.add(player1.deck.removeCard());
+            spoilsOfWar.add(player2.deck.removeCard());
+        } else {
+            int index = 1;
+            while (index <= 3) {
                 spoilsOfWar.add(player1.deck.removeCard());
                 spoilsOfWar.add(player2.deck.removeCard());
-                break;
-            default:
-                int index = 1;
 
-                while (index <= 3) {
-                    spoilsOfWar.add(player1.deck.removeCard());
-                    spoilsOfWar.add(player2.deck.removeCard());
-
-                    index += 1;
-                }
+                index += 1;
+            }
         }
     }
 
     public void awardSpoils(Player winner) {
         if(winner == null){
-            spoilsOfWar = new ArrayList();
+            spoilsOfWar = new ArrayList<>();
 
             return;
         }
@@ -91,8 +87,7 @@ public class Turn {
     }
 
     private boolean war() {
-        boolean firstCardEqual = player1.deck.rankOfCardAt(0) == player2.deck.rankOfCardAt(0);
-        return firstCardEqual;
+        return player1.deck.rankOfCardAt(0) == player2.deck.rankOfCardAt(0);
     }
 
 }

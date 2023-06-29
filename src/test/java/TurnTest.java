@@ -1,9 +1,6 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TurnTest {
@@ -16,7 +13,6 @@ class TurnTest {
     private Card card6;
 
     private Player player1;
-    private Deck deck1;
 
     private Player player2;
     private Deck deck2;
@@ -28,7 +24,7 @@ class TurnTest {
         card3 = new Card("Clubs", "Two", 2);
         Card[] cards = {card1, card2, card3};
 
-        deck1 = new Deck(cards);
+        Deck deck1 = new Deck(cards);
 
         card4 = new Card("Clubs", "Jack", 11);
         card5 = new Card("Clubs", "Ten", 10);
@@ -143,9 +139,7 @@ class TurnTest {
 
         turn.awardSpoils(null);
 
-        ArrayList<Card> expected = new ArrayList<>();
-
-        assertArrayEquals(expected.toArray(), turn.spoilsOfWar.toArray());
+        assertArrayEquals(new Card[0], turn.spoilsOfWar.toArray());
     }
 
     @Test

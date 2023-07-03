@@ -15,16 +15,24 @@ public class Game {
     public void start() {
         startScreen();
 
-        Scanner userInput = new Scanner(System.in);
-        String input = userInput.nextLine();
-        System.out.println(input);
-        if(input.toLowerCase(Locale.ROOT).equals("go")) {
-            createDecks();
-            runTurns();
-        } else {
-            System.out.println("Invalid input");
-            start();
-        }
+//        Scanner userInput = new Scanner(System.in);
+//        String input = userInput.nextLine();
+//        System.out.println(input.toLowerCase(Locale.ROOT));
+        createDecks();
+        shuffleDeck();
+        setStartingDecks();setStartingPlayers();
+
+        runTurns();
+//        if(input.toLowerCase(Locale.ROOT).equals("go")) {
+//            createDecks();
+//            shuffleDeck();
+//            setStartingDecks();setStartingPlayers();
+//
+//            runTurns();
+//        } else {
+//            System.out.println("Invalid input");
+//            start();
+//        }
     }
 
     private void createDecks() {
@@ -52,14 +60,14 @@ public class Game {
     }
 
     private void setStartingDecks() {
-        Card[] deck1Cards = new Card[26];
-        Card[] deck2Cards = new Card[26];
+        ArrayList<Card> deck1Cards = new ArrayList<>();
+        ArrayList<Card> deck2Cards = new ArrayList<>();
 
-        for (int x = 0; x <= 52; x++) {
+        for (int x = 0; x < 52; x++) {
             if(x <= 25) {
-                deck1Cards[x] = mainDeck.get(x);
+                deck1Cards.add(mainDeck.get(x));
             } else {
-                deck2Cards[x - 26] = mainDeck.get(x);
+                deck2Cards.add(mainDeck.get(x));
             }
         }
         deck1 = new Deck(deck1Cards);
@@ -79,9 +87,9 @@ public class Game {
     }
 
     private void turnMessages(Turn turn) {
-        Player winner = turn.winner();
         turnCount += 1;
         turn.pileCards();
+        Player winner = turn.winner();
         turn.awardSpoils(winner);
 
         if (Objects.equals(turn.type(), "basic") || Objects.equals(turn.type(), " war")) {
@@ -107,7 +115,7 @@ public class Game {
                 break;
             }
 
-            if (turnCount <= 999_999) {
+            if (turnCount <= 999) {
                 Turn turn = new Turn(player1, player2);
 
                 turnMessages(turn);

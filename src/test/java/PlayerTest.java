@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
@@ -10,7 +12,9 @@ class PlayerTest {
         Card card1 = new Card("Clubs", "Queen", 12);
         Card card2 = new Card("Clubs", "King", 13);
 
-        Card[] cards = {card1, card2};
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(card1);
+        cards.add(card2);
 
         deck = new Deck(cards);
     }
@@ -24,7 +28,7 @@ class PlayerTest {
 
     @Test
     void hasLost(){
-        Card[] emptyCards = new Card[0];
+        ArrayList<Card> emptyCards = new ArrayList<>();
         Deck emptyDeck = new Deck(emptyCards);
         Player player = new Player("Greg", deck);
         Player lostPlayer = new Player("Greg", emptyDeck);

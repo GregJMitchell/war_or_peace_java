@@ -1,15 +1,17 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Deck {
-    Card[] cards;
+    ArrayList<Card> cards;
 
-    public Deck(Card[] newCards) {
+    public Deck(ArrayList<Card> newCards) {
         cards = newCards;
     }
 
     public int rankOfCardAt(int index) {
-        return cards[index].rank;
+        if(cards.size() <= index) {
+            return 0;
+        }
+        return cards.get(index).rank;
     }
 
 public Card[] highRankingCards() {
@@ -25,18 +27,19 @@ public Card[] highRankingCards() {
 }
 
     public float percentHighRanking() {
-        return (float)highRankingCards().length / cards.length;
+        return (float)highRankingCards().length / cards.size();
     }
 
     public Card removeCard() {
-        Card removedCard = cards[cards.length - 1];
-        cards = Arrays.copyOf(cards, cards.length - 1);
+        if(cards.size() == 0) {
+            return null;
+        }
+        Card removedCard = cards.get(0);
+        cards.remove(0);
         return removedCard;
     }
 
     public void addCard(Card card) {
-        Card[] newCards = Arrays.copyOf(cards, cards.length + 1);
-        newCards[newCards.length - 1] = card;
-        cards = newCards;
+        cards.add(card);
     }
 }

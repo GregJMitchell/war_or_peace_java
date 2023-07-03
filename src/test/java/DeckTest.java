@@ -1,12 +1,16 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DeckTest {
     private Card card1;
     private Card card2;
     private Card card3;
+
+    private ArrayList<Card> cards = new ArrayList<>();
     @BeforeEach
     void setup() {
         card1 = new Card("Clubs", "Queen", 12);
@@ -15,7 +19,8 @@ class DeckTest {
     }
     @Test
     void rankOfCardAt() {
-        Card[] cards = {card1, card2};
+        cards.add(card1);
+        cards.add(card2);
 
         Deck deck = new Deck(cards);
 
@@ -25,7 +30,9 @@ class DeckTest {
 
     @Test
     void highRankingCards() {
-        Card[] cards = {card1, card2, card3};
+        cards.add(card1);
+        cards.add(card2);
+        cards.add(card3);
 
         Deck deck = new Deck(cards);
 
@@ -37,7 +44,9 @@ class DeckTest {
 
     @Test
     void percentHighRanking() {
-        Card[] cards = {card1, card2, card3};
+        cards.add(card1);
+        cards.add(card2);
+        cards.add(card3);
 
         Deck deck = new Deck(cards);
 
@@ -48,20 +57,23 @@ class DeckTest {
 
     @Test
     void removeCard() {
-        Card[] cards = {card1, card2, card3};
+        cards.add(card1);
+        cards.add(card2);
+        cards.add(card3);
 
         Deck deck = new Deck(cards);
 
-        Card[] expected = {card1, card2};
+        Card[] expected = {card2, card3};
 
         deck.removeCard();
 
-        assertArrayEquals(expected, deck.cards);
+        assertArrayEquals(expected, deck.cards.toArray());
     }
 
     @Test
     void addCard() {
-        Card[] cards = {card1, card2};
+        cards.add(card1);
+        cards.add(card2);
 
         Deck deck = new Deck(cards);
 
@@ -69,6 +81,6 @@ class DeckTest {
 
         deck.addCard(card3);
 
-        assertArrayEquals(expected, deck.cards);
+        assertArrayEquals(expected, deck.cards.toArray());
     }
 }

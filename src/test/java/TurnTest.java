@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TurnTest {
@@ -22,14 +24,20 @@ class TurnTest {
         card1 = new Card("Clubs", "Queen", 12);
         card2 = new Card("Clubs", "King", 13);
         card3 = new Card("Clubs", "Two", 2);
-        Card[] cards = {card1, card2, card3};
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(card1);
+        cards.add(card2);
+        cards.add(card3);
 
         Deck deck1 = new Deck(cards);
 
         card4 = new Card("Clubs", "Jack", 11);
         card5 = new Card("Clubs", "Ten", 10);
         card6 = new Card("Clubs", "Eight", 8);
-        Card[] cards2 = {card4, card5, card6};
+        ArrayList<Card> cards2 = new ArrayList<>();
+        cards2.add(card4);
+        cards2.add(card5);
+        cards2.add(card6);
 
         deck2 = new Deck(cards2);
 
@@ -46,7 +54,10 @@ class TurnTest {
 
     @Test
     void typeWar() {
-        Card[] cards = {card1, card4, card6};
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(card1);
+        cards.add(card4);
+        cards.add(card6);
         deck2 = new Deck(cards);
         player2 = new Player("Chris", deck2);
 
@@ -57,7 +68,10 @@ class TurnTest {
 
     @Test
     void typeMutuallyAssuredDestruction() {
-        Card[] cards = {card1, card4, card3};
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(card1);
+        cards.add(card4);
+        cards.add(card3);
         deck2 = new Deck(cards);
         player2 = new Player("Chris", deck2);
 
@@ -76,14 +90,17 @@ class TurnTest {
 
         turn.pileCards();
 
-        assertArrayEquals(expectedPlayer1, player1.deck.cards);
-        assertArrayEquals(expectedPlayer2, player2.deck.cards);
+        assertArrayEquals(expectedPlayer1, player1.deck.cards.toArray());
+        assertArrayEquals(expectedPlayer2, player2.deck.cards.toArray());
         assertArrayEquals(expectedSpoils, turn.spoilsOfWar.toArray());
     }
 
     @Test
     void pileCardsDefault() {
-        Card[] cards = {card1, card4, card6};
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(card1);
+        cards.add(card4);
+        cards.add(card6);
         deck2 = new Deck(cards);
         player2 = new Player("Chris", deck2);
 
@@ -95,8 +112,8 @@ class TurnTest {
 
         turn.pileCards();
 
-        assertArrayEquals(expectedPlayer1, player1.deck.cards);
-        assertArrayEquals(expectedPlayer2, player2.deck.cards);
+        assertArrayEquals(expectedPlayer1, player1.deck.cards.toArray());
+        assertArrayEquals(expectedPlayer2, player2.deck.cards.toArray());
         assertArrayEquals(expectedSpoils, turn.spoilsOfWar.toArray());
     }
 
@@ -109,7 +126,10 @@ class TurnTest {
 
     @Test
     void winnerWar() {
-        Card[] cards = {card1, card4, card6};
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(card1);
+        cards.add(card4);
+        cards.add(card6);
         deck2 = new Deck(cards);
         player2 = new Player("Chris", deck2);
 
@@ -120,7 +140,10 @@ class TurnTest {
 
     @Test
     void winnerMutuallyAssuredDestruction() {
-        Card[] cards = {card1, card4, card3};
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(card1);
+        cards.add(card4);
+        cards.add(card3);
         deck2 = new Deck(cards);
         player2 = new Player("Chris", deck2);
 
@@ -131,7 +154,10 @@ class TurnTest {
 
     @Test
     void awardSpoilsMutuallyAssuredDestruction() {
-        Card[] cards = {card1, card4, card3};
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(card1);
+        cards.add(card4);
+        cards.add(card3);
         deck2 = new Deck(cards);
         player2 = new Player("Chris", deck2);
 
@@ -144,7 +170,10 @@ class TurnTest {
 
     @Test
     void awardSpoilsWar() {
-        Card[] cards = {card1, card4, card6};
+        ArrayList<Card> cards = new ArrayList<>();
+        cards.add(card1);
+        cards.add(card4);
+        cards.add(card6);
         deck2 = new Deck(cards);
         player2 = new Player("Chris", deck2);
 
@@ -155,7 +184,7 @@ class TurnTest {
 
         Card[] expectedSpoils = {card3, card6, card2, card4, card1, card1};
 
-        assertArrayEquals(expectedSpoils, player2.deck.cards);
+        assertArrayEquals(expectedSpoils, player2.deck.cards.toArray());
     }
 
     @Test
@@ -167,6 +196,6 @@ class TurnTest {
 
         Card[] expectedSpoils = {card1, card2, card3, card6};
 
-        assertArrayEquals(expectedSpoils, player1.deck.cards);
+        assertArrayEquals(expectedSpoils, player1.deck.cards.toArray());
     }
 }

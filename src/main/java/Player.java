@@ -8,6 +8,6 @@ public class Player {
     }
 
     public boolean hasLost() {
-        return deck.cards.length == 0;
+        return deck.cards.size() == 0;
     }
 }

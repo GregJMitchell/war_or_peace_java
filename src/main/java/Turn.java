@@ -11,13 +11,21 @@ public class Turn {
     }
 
     public String type() {
-        if(mutuallyAssuredDestruction()) {
+        if(deckIsLessThan3() && (player1.deck.rankOfCardAt(0) == player2.deck.rankOfCardAt(0))) {
             return "mutually_assured_destruction";
-        } else if (war()) {
-            return "war";
-        } else {
-            return "basic";
         }
+
+        if (player1.deck.rankOfCardAt(0) != player2.deck.rankOfCardAt(0)){
+            return "basic";
+        } else if (player1.deck.rankOfCardAt(0) == player2.deck.rankOfCardAt(0) && player1.deck.rankOfCardAt(2) == player2.deck.rankOfCardAt(2)) {
+            return "mutually_assured_destruction";
+        } else {
+            return "war";
+        }
+    }
+
+    private Boolean deckIsLessThan3() {
+        return player1.deck.cards.size() < 3 || player2.deck.cards.size() < 3;
     }
 
     public Player winner() {
@@ -79,15 +87,4 @@ public class Turn {
             return player2;
         }
     }
-
-    private boolean mutuallyAssuredDestruction() {
-        boolean firstCardEqual = player1.deck.rankOfCardAt(0) == player2.deck.rankOfCardAt(0);
-        boolean thirdCardEqual = player1.deck.rankOfCardAt(2) == player2.deck.rankOfCardAt(2);
-        return firstCardEqual && thirdCardEqual;
-    }
-
-    private boolean war() {
-        return player1.deck.rankOfCardAt(0) == player2.deck.rankOfCardAt(0);
-    }
-
 }

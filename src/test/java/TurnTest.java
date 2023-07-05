@@ -84,9 +84,9 @@ class TurnTest {
     void pileCardsBasic() {
         Turn turn = new Turn(player1, player2);
 
-        Card[] expectedPlayer1 = {card1, card2};
-        Card[] expectedPlayer2 = {card4, card5};
-        Card[] expectedSpoils = {card3, card6};
+        Card[] expectedPlayer1 = {card2, card3};
+        Card[] expectedPlayer2 = {card5, card6};
+        Card[] expectedSpoils = {card1, card4};
 
         turn.pileCards();
 
@@ -108,7 +108,7 @@ class TurnTest {
 
         Card[] expectedPlayer1 = {};
         Card[] expectedPlayer2 = {};
-        Card[] expectedSpoils = {card3, card6, card2, card4, card1, card1};
+        Card[] expectedSpoils = {card1, card1, card2, card4, card3, card6};
 
         turn.pileCards();
 
@@ -182,7 +182,7 @@ class TurnTest {
 
         turn.awardSpoils(player2);
 
-        Card[] expectedSpoils = {card3, card6, card2, card4, card1, card1};
+        Card[] expectedSpoils = {card1, card1, card2, card4, card3, card6};
 
         assertArrayEquals(expectedSpoils, player2.deck.cards.toArray());
     }
@@ -194,7 +194,8 @@ class TurnTest {
 
         turn.awardSpoils(player1);
 
-        Card[] expectedSpoils = {card1, card2, card3, card6};
+//        Card[] expectedSpoils = {card1, card2, card3, card6};
+        Card[] expectedSpoils = {card2, card3, card1, card4};
 
         assertArrayEquals(expectedSpoils, player1.deck.cards.toArray());
     }

@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Game {
-    private ArrayList<Card> mainDeck = new ArrayList<>() {};
+    private final ArrayList<Card> mainDeck = new ArrayList<>() {};
 
     private Deck deck1;
     private Deck deck2;
@@ -10,7 +10,7 @@ public class Game {
     private Player player2;
     private int turnCount = 0;
 
-    public Game() {};
+    public Game() {}
 
     public void start() {
         startScreen();

@@ -10,7 +10,7 @@ class DeckTest {
     private Card card2;
     private Card card3;
 
-    private ArrayList<Card> cards = new ArrayList<>();
+    private final ArrayList<Card> cards = new ArrayList<>();
     @BeforeEach
     void setup() {
         card1 = new Card("Clubs", "Queen", 12);

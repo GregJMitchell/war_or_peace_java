@@ -87,15 +87,4 @@ public class Turn {
             return player2;
         }
     }
-
-    private boolean mutuallyAssuredDestruction() {
-        boolean firstCardEqual = player1.deck.rankOfCardAt(0) == player2.deck.rankOfCardAt(0);
-        boolean thirdCardEqual = player1.deck.rankOfCardAt(2) == player2.deck.rankOfCardAt(2);
-        return firstCardEqual && thirdCardEqual;
-    }
-
-    private boolean war() {
-        return player1.deck.rankOfCardAt(0) == player2.deck.rankOfCardAt(0);
-    }
-
 }
